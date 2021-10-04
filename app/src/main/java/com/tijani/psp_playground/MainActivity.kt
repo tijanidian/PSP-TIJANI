@@ -2,14 +2,20 @@ package com.tijani.psp_playground
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import android.view.View
+import android.widget.AbsSpinner
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
     //var es mutable, val inmutable (si o si hay que inicializarla)
     lateinit var label: TextView
     lateinit var button: Button
+    lateinit var spinner: ProgressBar
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupView() {
         label = findViewById(R.id.label)
         button = findViewById(R.id.button)
+        spinner=findViewById(R.id.spinner)
 
         //añadimos evento
         button.setOnClickListener {
@@ -32,7 +39,11 @@ class MainActivity : AppCompatActivity() {
             //withThreadAndPost()
             //threadFromParam()
             //launcMultipleThread()
-            launchInsideThread()
+            //launchInsideThread()
+            //postDelayed()
+
+            launchProgressBar()
+
         }
     }
 
@@ -149,6 +160,41 @@ class MainActivity : AppCompatActivity() {
                 Thread.sleep(1500)
             }
         }).start()
+    }
+
+
+    /**
+     * Hilo con delay
+     */
+    private fun postDelayed(){
+        Handler(Looper.getMainLooper()).postDelayed({
+            label.text="Hola!"
+        },3000)
+    }
+
+    private fun launchProgressBar(){
+
+        val thread = Thread(Runnable {
+            for (i in 1..10) {
+                runOnUiThread {
+                    label.text = "Hola $i"
+                }
+                Thread.sleep(1000)
+            }
+
+            runOnUiThread {
+                spinner.visibility= View.VISIBLE
+            }
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                spinner.visibility= View.GONE
+            },3000)
+
+        })
+        thread.start()
+
+
+
 
     }
 
