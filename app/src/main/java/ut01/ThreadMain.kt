@@ -1,4 +1,4 @@
-package com.tijani.psp_playground
+package ut01
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,12 +6,12 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.View
-import android.widget.AbsSpinner
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import com.tijani.psp_playground.R
 
-class MainActivity : AppCompatActivity() {
+class ThreadMain : AppCompatActivity() {
     //var es mutable, val inmutable (si o si hay que inicializarla)
     lateinit var label: TextView
     lateinit var button: Button
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_thread)
         //Método para la vista
         setupView()
 
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupView() {
         label = findViewById(R.id.label)
         button = findViewById(R.id.button)
-        spinner=findViewById(R.id.spinner)
+        spinner = findViewById(R.id.spinner)
 
         //añadimos evento
         button.setOnClickListener {
@@ -42,7 +42,9 @@ class MainActivity : AppCompatActivity() {
             //launchInsideThread()
             //postDelayed()
 
-            launchProgressBar()
+            //launchProgressBar()
+            hideProgressBar()
+
 
         }
     }
@@ -166,13 +168,13 @@ class MainActivity : AppCompatActivity() {
     /**
      * Hilo con delay
      */
-    private fun postDelayed(){
+    private fun postDelayed() {
         Handler(Looper.getMainLooper()).postDelayed({
-            label.text="Hola!"
-        },3000)
+            label.text = "Hola!"
+        }, 3000)
     }
 
-    private fun launchProgressBar(){
+    private fun launchProgressBar() {
 
         val thread = Thread(Runnable {
             for (i in 1..10) {
@@ -183,21 +185,42 @@ class MainActivity : AppCompatActivity() {
             }
 
             runOnUiThread {
-                spinner.visibility= View.VISIBLE
+                spinner.visibility = View.VISIBLE
             }
 
             Handler(Looper.getMainLooper()).postDelayed({
-                spinner.visibility= View.GONE
-            },3000)
+                spinner.visibility = View.GONE
+            }, 3000)
 
         })
         thread.start()
 
 
-
     }
 
+    private fun hideProgressBar() {
+        val thread = Thread(Runnable {
 
+            runOnUiThread {
+                spinner.visibility = View.VISIBLE
+            }
+            Thread.sleep(10000)
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                spinner.visibility = View.GONE
+            }, 0)
+            for (i in 1..10) {
+                runOnUiThread {
+                    label.text = "Hola $i"
+                }
+                Thread.sleep(1000)
+
+            }
+
+        })
+        thread.start()
+
+    }
 
 
 }

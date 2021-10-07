@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pspplayground">
         <activity
-            android:name=".MainActivity"
+            android:name="ut02.MainActivity"
+            android:exported="true" />
+        <activity
+            android:name="ut01.ThreadMain"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
