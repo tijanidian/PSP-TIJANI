@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pspplayground">
         <activity
+            android:name="ut02.Exercise01Activity"
+            android:exported="true" />
+        <activity
             android:name="ut02.MainActivity"
             android:exported="true" />
         <activity
