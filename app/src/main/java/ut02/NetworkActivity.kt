@@ -11,7 +11,7 @@ class NetworkActivity : AppCompatActivity() {
     private val TAG = NetworkActivity::class.java.canonicalName
 
     //Se crea el cliente que vamos a usar. Esto debería ser hecho con un Inyector de dependencias.
-    private val apiClient: ApiClient = RetrofitApiClient()
+    private val apiClient: ApiClient = MockApiCliente()
 
     /**
      * Ciclo de vida de la actividad. Primer método que se ejecuta en el ciclo de vida.

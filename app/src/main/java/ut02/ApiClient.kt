@@ -11,7 +11,8 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 interface ApiClient {
     fun getUsers(): List<UserApiModel>
-    //fun getUser(userId: Int) : UserApiModel?
+    //Al introducir un id nos muestra toda su información
+    fun getUser(userId: Int) : UserApiModel?
     fun getUsers(callback: ApiCallback<List<UserApiModel>>)
     fun getPost():List<PostApiModel>
 }
@@ -36,6 +37,10 @@ class MockApiCliente : ApiClient {
                 UserApiModel(4, "Usuario 4", "Usuario4", "user@email.es"),
             )
         )
+    }
+
+    override fun getUser(userId: Int): UserApiModel? {
+        return UserApiModel(userId,"Usuario prueba","Usuario pureba1","Correo@prueba")
     }
 
     override fun getPost(): List<PostApiModel> {
@@ -118,6 +123,17 @@ class RetrofitApiClient : ApiClient {
             }
         )
     }
+
+    override fun getUser(userId: Int): UserApiModel? {
+        val call=apiEndPoint.getUser(userId)
+        val response = call.execute()
+        return if (response.isSuccessful) {
+            response.body()?: UserApiModel()
+        } else {
+            UserApiModel()
+        }
+    }
+
 
     override fun getPost(): List<PostApiModel> {
         val call = apiEndPoint.getPosts()
