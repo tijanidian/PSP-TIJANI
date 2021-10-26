@@ -19,7 +19,7 @@ class NetworkActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_netwotk)
-        testAsyncApi()
+        testAsyncApiUser(1)
 
     }
 
@@ -42,6 +42,7 @@ class NetworkActivity : AppCompatActivity() {
      */
 
     //Probamos con users
+
     private fun testAsyncApi() {
         val threadNetwotk = Thread(Runnable {
             val users = apiClient.getUsers()
@@ -55,7 +56,6 @@ class NetworkActivity : AppCompatActivity() {
         })
         threadNetwotk.start()
     }
-
     //Probamos con Posts
     private fun testAsyncApiPost() {
         val threadNetwotk = Thread(Runnable {
@@ -70,6 +70,21 @@ class NetworkActivity : AppCompatActivity() {
         })
         threadNetwotk.start()
     }
+
+
+    //Probamos con un id especifico
+    private fun testAsyncApiUser(userId:Int) {
+        val threadNetwork= Thread(Runnable {
+            val user=apiClient.getUser(userId)
+            if (user!=null){
+                Log.i(TAG,"$user")
+            }else{
+                Log.i(TAG, "User list is empty")
+            }
+        })
+        threadNetwork.start()
+    }
+
 
     private fun exampleCallback() {
         val exampleCallback = ExampleCallback()

@@ -125,13 +125,16 @@ class RetrofitApiClient : ApiClient {
     }
 
     override fun getUser(userId: Int): UserApiModel? {
+
         val call=apiEndPoint.getUser(userId)
         val response = call.execute()
         return if (response.isSuccessful) {
-            response.body()?: UserApiModel()
+            response.body()
         } else {
-            UserApiModel()
+            null
         }
+
+
     }
 
 
