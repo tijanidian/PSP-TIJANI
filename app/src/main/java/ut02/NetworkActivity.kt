@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.tijani.psp_playground.R
+import retrofit2.Retrofit
 
 class NetworkActivity : AppCompatActivity() {
 
@@ -11,7 +12,7 @@ class NetworkActivity : AppCompatActivity() {
     private val TAG = NetworkActivity::class.java.canonicalName
 
     //Se crea el cliente que vamos a usar. Esto debería ser hecho con un Inyector de dependencias.
-    private val apiClient: ApiClient = MockApiCliente()
+    private val apiClient: ApiClient = RetrofitApiClient()
 
     /**
      * Ciclo de vida de la actividad. Primer método que se ejecuta en el ciclo de vida.
@@ -19,7 +20,7 @@ class NetworkActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_netwotk)
-        testAsyncApiUser(1)
+        testAsyncApiUser(2)
 
     }
 
