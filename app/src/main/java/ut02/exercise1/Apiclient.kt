@@ -1,4 +1,6 @@
 package ut02.exercise1
 
-class Apiclient {
+interface ApiClient {
+    fun getUser(userId: Int): UserApiModel?
+    fun getUsers(): List<UserApiModel>
 }
