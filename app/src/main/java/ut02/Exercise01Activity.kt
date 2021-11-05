@@ -17,12 +17,8 @@ class Exercise01Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise01)
 
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            setContentView(R.layout.activity_exercise01)
-            setupView()
-        }
 
+    }
         private fun setupView() {
             val actionMock: Button = findViewById(R.id.action_mock)
             actionMock.setOnClickListener {
