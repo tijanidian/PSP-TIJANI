@@ -1,11 +1,10 @@
-package ut02
+package ut02.exercise1
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import com.tijani.psp_playground.R
-import ut02.exercise1.UserRepository
 
 class Exercise01Activity : AppCompatActivity() {
     private val TAG: String = Exercise01Activity::class.java.simpleName
@@ -16,6 +15,7 @@ class Exercise01Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise01)
+        setupView()
 
 
     }
@@ -35,11 +35,13 @@ class Exercise01Activity : AppCompatActivity() {
             //obtengo la abstracción del ApiClient a usar
             val userRepository = UserRepository(apiClientFactory.build(actionId))
 
-            //Visualizo el listado de usuarios
-            val users = userRepository.getUsers()
-            users.forEach { userApiModel ->
-                Log.d(TAG, "$userApiModel")
-            }
+                //Visualizo el listado de usuarios
+                val users = userRepository.getUsers()
+                users.forEach { userApiModel ->
+                    Log.d(TAG, "$userApiModel")
+                }
+
+
 
             //Obtengo un usuario y visualizo el usuario
             val user = userRepository.getUser(1)
@@ -47,4 +49,6 @@ class Exercise01Activity : AppCompatActivity() {
                 Log.d(TAG, "$this")
             }
     }
+
+
 }
