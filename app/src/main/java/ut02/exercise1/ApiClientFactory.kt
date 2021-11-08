@@ -1,4 +1,4 @@
-package ut02
+package ut02.exercise1
 
 import com.tijani.psp_playground.R
 import ut02.exercise1.ApiClient
