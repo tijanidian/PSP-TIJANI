@@ -4,14 +4,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.tijani.psp_playground.R
-import ut02.exercise2_alerts.data.AlertDataRepository
+
 import ut02.exercise2_alerts.app.ApiClient
-import ut02.exercise2_alerts.domain.GetAlertUseCase
 import ut02.exercise2_alerts.app.RetrofitApliClient
+
+import ut02.exercise2_alerts.domain.AlertRepository
 
 class AlertActivity : AppCompatActivity() {
     private val apiClient: ApiClient = RetrofitApliClient()
-    private val viewModel: AlertViewModel = AlertViewModel(GetAlertUseCase(AlertDataRepository()))
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alert)

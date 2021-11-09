@@ -4,8 +4,9 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import ut02.exercise2_alerts.domain.AlertModel
+import ut02.exercise2_alerts.data.remote.AlertApiModel
 import java.util.concurrent.TimeUnit
+
 
 class RetrofitApliClient: ApiClient {
     private val urlEndPoint: String = "https://plagricola.sitehub.es/api/public/"
@@ -35,15 +36,15 @@ class RetrofitApliClient: ApiClient {
             .connectTimeout(30, TimeUnit.SECONDS)
             .build()
 
-
-    override fun getAlerts(): List<AlertModel> {
-        val call = apiEndPoint.getAlerts()
-        val response = call.execute()
-        return if (response.isSuccessful) {
-            response.body()?.data ?: mutableListOf()
-        } else {
+    override fun getAlerts(): List<AlertApiModel> {
+       val call=apiEndPoint.getAlerts()
+        val response=call.execute()
+        return if (response.isSuccessful){
+            response.body()?.data?: mutableListOf()
+        }else{
             mutableListOf()
         }
+
     }
 
 
