@@ -36,6 +36,7 @@ class Ut03Ex01Activity : AppCompatActivity() {
     }
 
     private fun exampleCoroutines(){
-        viewModel.getUsersGlobalScope()
+        //viewModel.getUsersGlobalScope()
+        viewModel.getUserViewModelScope()
     }
 }

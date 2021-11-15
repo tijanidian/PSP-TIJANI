@@ -7,22 +7,42 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import ut03.ex01.app.RetrofitApiClient
 
-class Ut03Ex01ViewModel():ViewModel() {
+class Ut03Ex01ViewModel() : ViewModel() {
 
     /**
      * Ejecucion de una corrutina con un Scope Global
      */
-    fun getUsersGlobalScope(){
+    fun getUsersGlobalScope() {
         //GlobalScope no finalizará hasta que no se finalice la app
-        viewModelScope.launch (Dispatchers.Main){
-            var i=0
-            while (true){
-                Log.d("@dev","hola: $i")
+        viewModelScope.launch(Dispatchers.Main) {
+            var i = 0
+            while (true) {
+                Log.d("@dev", "hola: $i")
                 delay(1000)
-                i+=1
+                i += 1
             }
         }
-        Log.d("@dev","UI Thread")
+        Log.d("@dev", "UI Thread")
+    }
+
+    fun getUserViewModelScope() {
+        val apiClient = RetrofitApiClient()
+
+        viewModelScope.launch(Dispatchers.Main) {
+            Log.d("@dev", "Llamo a API from ViewModelScope....")
+            var users = apiClient.getUsers()
+            Log.d("@dev", "GlobalScope: $users")
+        }
+
+        GlobalScope.launch {
+            Log.d("@dev", "Llamo a API.....")
+            //var users: List<UserApiModel> = mutableListOf()
+
+            var users = apiClient.getUsers()
+            Log.d("@dev", "GlobalScope: $users")
+
+        }
     }
 }
