@@ -1,4 +1,4 @@
-package ut02
+package com.tijani.psp_playground
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
